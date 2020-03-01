@@ -1,6 +1,5 @@
 
 
-  let num = []
 document.addEventListener("DOMContentLoaded", () => {
   let a = document.getElementById("counter")
   function startTimer () {
@@ -17,12 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
   let lks = {};
-
   document.addEventListener("click", function (event) { 
     // console.log(event.target);
-
+    
     if (event.target.matches("#minus")) {
-    c = parseInt(a.innerText);
+      c = parseInt(a.innerText);
       a.innerText = c-1;
     }
     else if (event.target.matches("#plus")) {
@@ -30,31 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
       a.innerText = c+1;
     } 
     else if (event.target.matches("#heart")) {
-      num.push(parseInt(a.innerText));
-      // Loop through every element in the array
-      for(let i = 0; i < num.length; i++){
         // If the number is a key inside the object
-        if ([num[i]]){
+        if (lks[parseInt(a.innerText)]){
           // Add 1 to the counter
-          lks[num[i]] += parseInt(1)
+          lks[parseInt(a.innerText)] += 1
         } 
         else {
           // Otherwise, create a new counter for that new number
-          // lks.push(num);
-          lks[num[i]] = parseInt(1)
-          
+          lks[parseInt(a.innerText)] = 1
         }
-      }
-
-      // Print in the console
-      console.log(lks);
-      console.log(num);
-
-      let likeUl = document.getElementById("likes");
-      let newLike = document.createElement("li");
-      newLike.innerHTML = `Great choice! The # ${a.innerText} is liked _ times.`
-      likeUl.appendChild(newLike);
-    };
+        let likeUl = document.getElementById("likes");
+        let newLike = document.createElement("li");
+        newLike.innerHTML = `Great choice! The # ${a.innerText} is liked ${lks[parseInt(a.innerText)]} times.`
+        likeUl.appendChild(newLike);
+      };
     
     if (event.target.matches("#pause")) {
       document.querySelectorAll("button").forEach(button => button.disabled = true)
